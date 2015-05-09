@@ -35,3 +35,11 @@ include_directories(.. ${MIMETIC_INCLUDE_DIRS})
 add_library(xarf_io OBJECT
 	operator_out.cpp
 )
+
+set_property(TARGET xarf_io PROPERTY COMPILE_FLAGS "-fPIC")
+
+
+# build object library for static io functions.
+add_library(xarf_io_static OBJECT
+	operator_out.cpp
+)

@@ -24,8 +24,18 @@
 # include parent directory for header files.
 include_directories(..)
 
+
 # build object library for header functions.
 add_library(xarf_header OBJECT
+	set_from_char.cpp
+	set_from_string.cpp
+)
+
+set_property(TARGET xarf_header PROPERTY COMPILE_FLAGS "-fPIC")
+
+
+# build object library for static header functions.
+add_library(xarf_header_static OBJECT
 	set_from_char.cpp
 	set_from_string.cpp
 )

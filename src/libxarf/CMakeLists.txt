@@ -51,7 +51,8 @@ target_link_libraries(xarf ${MIMETIC_LIBRARIES})
 
 # build static library
 add_library(xarf_static STATIC
-	$<TARGET_OBJECTS:xarf_header>
+	$<TARGET_OBJECTS:xarf_header_static>
+	$<TARGET_OBJECTS:xarf_io_static>
 )
 
 # set output name of xarf_static to xarf
