@@ -25,6 +25,9 @@
 find_package(Mimetic REQUIRED)
 
 
+# activate CXX11
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+
 # include parent directory and mimetic include dir for header files.
 include_directories(.. ${MIMETIC_INCLUDE_DIRS})
 
