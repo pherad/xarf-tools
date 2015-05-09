@@ -23,6 +23,7 @@
 
 #include "xarf.hpp"
 
+#include <cstdint>
 #include <mimetic/message.h>
 
 

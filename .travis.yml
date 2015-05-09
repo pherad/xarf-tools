@@ -4,8 +4,6 @@ compiler:
   - clang
 before_install:
   - sudo add-apt-repository ppa:kalakris/cmake -y
-  - echo "deb http://de.archive.ubuntu.com/ubuntu trusty universe" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
   - sudo apt-get update -qq
   - sudo apt-get install cmake
   - sudo apt-get install libmimetic-dev
