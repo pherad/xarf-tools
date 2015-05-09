@@ -21,41 +21,14 @@
 #
 
 
-#
-# recurse into subdirectories
-#
-add_subdirectory(header)
-add_subdirectory(io)
-
-
-#
-# build libXARF
-#
-
 # search for required modules
 find_package(Mimetic REQUIRED)
 
-# include header files
-include_directories(${MIMETIC_INCLUDE_DIRS})
 
+# include parent directory and mimetic include dir for header files.
+include_directories(.. ${MIMETIC_INCLUDE_DIRS})
 
-# build dynamic library
-add_library(xarf SHARED
-	$<TARGET_OBJECTS:xarf_header>
-	$<TARGET_OBJECTS:xarf_io>
+# build object library for io functions.
+add_library(xarf_io OBJECT
+	operator_out.cpp
 )
-
-# link dynamic library against mimetic
-target_link_libraries(xarf ${MIMETIC_LIBRARIES})
-
-
-# build static library
-add_library(xarf_static STATIC
-	$<TARGET_OBJECTS:xarf_header>
-)
-
-# set output name of xarf_static to xarf
-set_target_properties(xarf_static PROPERTIES OUTPUT_NAME xarf)
-
-# link static library against mimetic
-target_link_libraries(xarf_static ${MIMETIC_LIBRARIES})
