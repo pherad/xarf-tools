@@ -22,7 +22,22 @@
 
 
 #
-# recurse into subdirectories
+# search for required libraries
 #
-add_subdirectory(genxarf)
-add_subdirectory(libxarf)
+find_package(Mimetic)
+
+
+#
+# build genxarf
+#
+
+# include header files of libxarf
+include_directories(../libxarf)
+
+# build genxarf
+add_executable(genxarf
+	genxarf.cpp
+)
+
+# link againt libxarf
+target_link_libraries(genxarf xarf)
