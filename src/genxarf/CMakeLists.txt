@@ -22,12 +22,6 @@
 
 
 #
-# search for required libraries
-#
-find_package(Mimetic)
-
-
-#
 # build genxarf
 #
 
