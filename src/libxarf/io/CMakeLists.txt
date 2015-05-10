@@ -21,25 +21,29 @@
 #
 
 
-# search for required modules
-find_package(Mimetic REQUIRED)
+#
+# include required modules
+#
+include(add_lib)
 
+
+#
+# search for required modules
+#
+find_package(MIMETIC REQUIRED)
+
+
+#
+# build libXARF IO functions
+#
 
 # activate CXX11
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
-# include parent directory and mimetic include dir for header files.
+# include parent directory and mimetic include dir for header files
 include_directories(.. ${MIMETIC_INCLUDE_DIRS})
 
-# build object library for io functions.
-add_library(xarf_io OBJECT
-	operator_out.cpp
-)
-
-set_property(TARGET xarf_io PROPERTY COMPILE_FLAGS "-fPIC")
-
-
-# build object library for static io functions.
-add_library(xarf_io_static OBJECT
+# build object library for io functions
+add_lib(xarf_io OBJECT
 	operator_out.cpp
 )

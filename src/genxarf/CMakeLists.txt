@@ -40,4 +40,4 @@ add_executable(genxarf
 )
 
 # link againt libxarf
-target_link_libraries(genxarf xarf)
+target_link_libraries(genxarf xarf_shared)
