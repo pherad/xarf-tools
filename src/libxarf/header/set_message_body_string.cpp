@@ -23,29 +23,24 @@
 
 #include "xarf.hpp"
 
-#include <cstdint>
-#include <mimetic/message.h>
 
-
-std::ostream&
-operator<< (std::ostream &out, const XARF &report)
+/** \brief Set \p text as text for send mail.
+ *
+ * \details Copies string \p text into internal memory and sets it as text for
+ *  the generated mail.
+ *
+ *
+ * \param text Plain text for mail.
+ *
+ * \return This function returns no value.
+ *
+ * \exception If \p text would exceed the internal strings max_size, a
+ *  length_error exception is thrown.
+ * \exception A bad_alloc exception is thrown if the function needs to allocate
+ *  storage and fails.
+ */
+void
+XARF::set_message_body(std::string &text)
 {
-	// create new multipart mail
-	mimetic::MultipartMixed mail;
-
-	// set mail header
-	mail.header().from(report.mail_from);
-	mail.header().to(report.mail_to);
-
-	// set MIME-preamble
-	mail.body().preamble("This is a multi-part message in MIME format.");
-
-
-	// write message body
-	mimetic::TextPlain *msg_body = new mimetic::TextPlain(report.mail_body);
-	mail.body().parts().push_back(msg_body);
-
-	// stream to out and return out
-	out << mail;
-	return out;
+	this->mail_body = text;
 }

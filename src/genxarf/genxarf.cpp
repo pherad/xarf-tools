@@ -40,13 +40,15 @@ main(int argc, char **argv)
 	 */
 	static struct option long_options[] = {
 		{"from", required_argument, 0, 'f'},
+		{"to", required_argument, 0, 't'},
+		{"message", required_argument, 0, 'm'},
 		{0}
 	};
 
 	int c, option_index;
 	while (true) {
 		// evaluate current argument
-		c = getopt_long(argc, argv, "f:", long_options, &option_index);
+		c = getopt_long(argc, argv, "f:m:t:", long_options, &option_index);
 
 		// break at end of arguments
 		if (c == -1)
@@ -56,6 +58,16 @@ main(int argc, char **argv)
 			case 'f':
 				// set from header for report
 				report.set_from(optarg);
+				break;
+
+			case 'm':
+				// set message body for report
+				report.set_message_body(optarg);
+				break;
+
+			case 't':
+				// set to header for report
+				report.set_to(optarg);
 				break;
 
 

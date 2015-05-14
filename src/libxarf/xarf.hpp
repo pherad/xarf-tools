@@ -33,12 +33,21 @@ class XARF
 {
 	public:
 		friend std::ostream& operator<< (std::ostream &out, const XARF &report);
+		//friend std::istream& operator>> (std::istream &in, XARF &report);
 
 		void set_from(const char *mail_address);
 		void set_from(std::string &mail_address);
 
+		void set_to(const char *mail_address);
+		void set_to(std::string &mail_address);
+
+		void set_message_body(const char *src);
+		void set_message_body(std::string &src);
+
 	private:
 		std::string mail_from;
+		std::string mail_to;
+		std::string mail_body;
 };
 
 

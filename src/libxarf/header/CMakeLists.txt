@@ -38,4 +38,10 @@ include_directories(..)
 add_lib(xarf_header OBJECT
 	set_from_char.cpp
 	set_from_string.cpp
+
+	set_to_char.cpp
+	set_to_string.cpp
+
+	set_message_body_char.cpp
+	set_message_body_string.cpp
 )

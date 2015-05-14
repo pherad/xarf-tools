@@ -26,8 +26,8 @@
 
 /** \brief Set \p mail_address as from-header for send mail.
  *
- * \details Copies string \p mail_address into internal memory and sets
- *  it as from-header for the generated mail.
+ * \details Copies string \p mail_address into internal memory and sets it as
+ *  from-header for the generated mail.
  *
  *
  * \param mail_address Mail-address as defined in RFC 822.

@@ -23,29 +23,24 @@
 
 #include "xarf.hpp"
 
-#include <cstdint>
-#include <mimetic/message.h>
 
-
-std::ostream&
-operator<< (std::ostream &out, const XARF &report)
+/** \brief Set \p mail_address as to-header for send mail.
+ *
+ * \details Copies array of char \p mail_address into internal memory and sets
+ *  it as from-header for the generated mail.
+ *
+ *
+ * \param mail_address Mail-address as defined in RFC 822.
+ *
+ * \return This function returns no value.
+ *
+ * \exception If \p mail_address would exceed the internal strings max_size, a
+ *  length_error exception is thrown.
+ * \exception A bad_alloc exception is thrown if the function needs to allocate
+ *  storage and fails.
+ */
+void
+XARF::set_to(const char* mail_address)
 {
-	// create new multipart mail
-	mimetic::MultipartMixed mail;
-
-	// set mail header
-	mail.header().from(report.mail_from);
-	mail.header().to(report.mail_to);
-
-	// set MIME-preamble
-	mail.body().preamble("This is a multi-part message in MIME format.");
-
-
-	// write message body
-	mimetic::TextPlain *msg_body = new mimetic::TextPlain(report.mail_body);
-	mail.body().parts().push_back(msg_body);
-
-	// stream to out and return out
-	out << mail;
-	return out;
+	this->mail_to = mail_address;
 }
