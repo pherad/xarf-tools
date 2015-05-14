@@ -64,6 +64,7 @@ main(int argc, char **argv)
 			 * second error message.
 			 */
 			case '?':
+				exit(EXIT_FAILURE);
 				break;
 
 			/* The default region should *NEVER* be reached. If it is reached,
