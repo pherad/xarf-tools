@@ -36,6 +36,10 @@ MaxEmptyLinesToKeep: 2
 ---
 Language: Cpp
 
+# Use C++03-compatible syntax.
+Standard: Cpp03
+Cpp11BracedListStyle: false
+
 # Align escaped newlines as far left as possible.
 AlignEscapedNewlinesLeft: true
 
@@ -61,10 +65,5 @@ IndentCaseLabels: true
 
 # Empty lines at the start of blocks will not be kept.
 KeepEmptyLinesAtTheStartOfBlocks: false
-
-# Indent with a tab, which is 4 spaces width.
-IndentWidth: 4
-TabWidth: 4
-UseTab: ForIndentation
 
 ...
