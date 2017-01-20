@@ -19,38 +19,17 @@
 #   2015-2017 Alexander Haase <ahaase@mksec.de>
 #
 
-
-# minimum required cmake version
-cmake_minimum_required(VERSION 2.8.11)
+include(xarf_headers)
 
 
-#
-# project information
-#
-if (${CMAKE_MAJOR_VERSION} EQUAL 3)
-	project("X-ARF tools" LANGUAGES C CXX)
-else ()
-	project("X-ARF tools" C CXX)
-endif ()
+# Install and manage the public header files of the libxarf sources. This has to
+# be done to use the same headers for the XARF sources and the API without
+# getting conflicts about the used paths. Otherwise you'd have to take care
+# about file locations after installation, especially if you use the headers
+# over multiple directories.
+xarf_add_header(message.hpp)
 
 
-# choose new behaviour for CMP0042
-# see http://www.cmake.org/cmake/help/v3.0/policy/CMP0042.html for more details
-if (POLICY CMP0042)
-	cmake_policy(SET CMP0042 NEW)
-endif (POLICY CMP0042)
-
-
-#
-# cmake configuration
-#
-set(CMAKE_MODULE_PATH
-	"${PROJECT_SOURCE_DIR}/cmake"
-	"${PROJECT_SOURCE_DIR}/externals/CMake-easylib/cmake"
-	${CMAKE_MODULE_PATH})
-
-
-#
-# recurse into subdirectories
-#
-add_subdirectory(src)
+# Build libxarf message module.
+easy_add_library(xarf_message OBJECT
+	constructor.cpp)

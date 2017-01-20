@@ -20,21 +20,14 @@
  *   2015-2017 Alexander Haase <ahaase@mksec.de>
  */
 
+#ifndef LIBXARF_MESSAGE_H
+#define LIBXARF_MESSAGE_H
 
-#ifndef LIBXARF_H
-#define LIBXARF_H
-
-
-#include <iostream>
-#include <string>
 
 #include <mimetic/message.h>
-#include <mimetic/mimetic.h>
 
 
-/** \brief X-ARF class namespace.
- */
-namespace XARF {
+namespace xarf {
 
 /** \brief Class representing the X-ARF report as mail.
  *
@@ -42,8 +35,10 @@ namespace XARF {
  *  MultipartMixed provides the basic structure of the mail, while this class
  *  is responsible for the structure of the mail and its attachments.
  */
-class XARF : mimetic::MultipartMixed
+class message : public mimetic::MultipartMixed
 {
+  public:
+	message();
 };
 }
 

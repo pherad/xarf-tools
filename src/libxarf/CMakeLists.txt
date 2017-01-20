@@ -19,8 +19,32 @@
 #   2015-2017 Alexander Haase <ahaase@mksec.de>
 #
 
+include(easylib)
+include(xarf_headers)
+
 find_package(MIMETIC REQUIRED)
 
 
 # Include directories required for all parts of libXARF.
-include_directories(${MIMETIC_INCLUDE_DIRS})
+include_directories(${MIMETIC_INCLUDE_DIRS}
+                    ${XARF_HEADER_DIR})
+
+
+# Recurse into subdirectories.
+#
+# This has to be done BEFORE adding the X-ARF libraries, because for adding
+# X-ARF with its object libraries, the easylib functions need to know about the
+# available object libraries. Otherwise the compilation of libxarf will result
+# in errors, as easylib would select the static object library for the shared
+# X-ARF library.
+add_subdirectory(message)
+
+
+#
+# build libXARF
+#
+
+easy_add_library(xarf
+	$<TARGET_OBJECTS:xarf_message>)
+
+target_link_libraries(xarf_shared ${MIMETIC_LIBRARIES})
