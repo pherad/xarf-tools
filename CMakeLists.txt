@@ -53,4 +53,5 @@ set(CMAKE_MODULE_PATH
 #
 # recurse into subdirectories
 #
+add_subdirectory(doc)
 add_subdirectory(src)

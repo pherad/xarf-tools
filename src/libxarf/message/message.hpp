@@ -24,21 +24,27 @@
 #define LIBXARF_MESSAGE_H
 
 
-#include <mimetic/message.h>
+#include <iostream>
+
+#include <mimetic/mimeentity.h>
 
 
 namespace xarf {
 
-/** \brief Class representing the X-ARF report as mail.
+/** \brief Class for handling the X-ARF report as mail.
  *
- * \details This class is a special mail type of mimetics MultipartMixed class.
- *  MultipartMixed provides the basic structure of the mail, while this class
- *  is responsible for the structure of the mail and its attachments.
+ * \details This class is a special mimetic MimeEntity class to emit and parse
+ *  X-ARF mails. MimeEntity provides the basic structure of the mail, while this
+ *  class is responsible for the structure of the mail and its attachments.
+ *
+ * \note MultipartMixed can't be used due its incompatibility for parsing mails.
+ *  It will generate new mails every time a constructor is called.
  */
-class message : public mimetic::MultipartMixed
+class message : public mimetic::MimeEntity
 {
-  public:
-	message();
+public:
+  message();
+  message(std::istream &);
 };
 }
 

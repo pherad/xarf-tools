@@ -20,14 +20,50 @@
  *   2015-2017 Alexander Haase <ahaase@mksec.de>
  */
 
-#include <iostream>
-
 #include <xarf/message.hpp>
 
+#include <iostream>
 
-using namespace xarf;
+
+using xarf::message;
+using mimetic::Field;
+using mimetic::ContentType;
 
 
-message::message()
+/** \brief Constructor.
+ *
+ * \details The empty constructor creates a new \ref message object with
+ *  predefinded default values.
+ */
+message::message() : MimeEntity()
+{
+  /* As MultipartMixed can't be used as base class, the headers for multipart
+   * messages have to be setup here. */
+  ContentType ct("multipart", "unknown");
+  ct.paramList().push_back(
+      ContentType::Param("boundary", ContentType::Boundary()));
+  m_header.contentType(ct);
+
+
+  /* As described in X-ARF specification v0.2 and in RFC3834, the auto-submitted
+   * header will be set to indicate, that this mail was auto-generated. This
+   * should be fine for almost any automatic X-ARF generation like fail2ban and
+   * similar software. */
+  m_header.push_back(Field("Auto-Submitted: auto-generated"));
+
+  /* Set X-XARF header for X-ARF specification v0.2. This class may parse v1.0
+   * reports but only emit v2.0. This class will only handle X-XARF: PLAIN, as
+   * signing or packing the reports should be done by other components and all
+   * types encapsulate the PLAIN report. */
+  m_header.push_back(Field("X-XARF: PLAIN"));
+}
+
+
+/** \brief Constructor for parsing streams.
+ *
+ * \details This constructor parses the RFC822 conform mail from strem \p is and
+ *  evaluates all required values.
+ */
+message::message(std::istream &is) : MimeEntity(is)
 {
 }
