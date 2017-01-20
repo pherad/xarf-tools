@@ -19,30 +19,8 @@
 #   2015-2017 Alexander Haase <ahaase@mksec.de>
 #
 
-
-#
-# recurse into subdirectories
-#
-add_subdirectory(header)
-add_subdirectory(io)
-
-
-#
-# build libXARF
-#
-
-# search for required modules
 find_package(MIMETIC REQUIRED)
 
-# include header files
+
+# Include directories required for all parts of libXARF.
 include_directories(${MIMETIC_INCLUDE_DIRS})
-
-# build library
-add_lib(xarf
-	$<TARGET_OBJECTS:xarf_header>
-	$<TARGET_OBJECTS:xarf_io>
-)
-
-# link library against mimetic
-target_link_libraries(xarf_static ${MIMETIC_LIBRARIES})
-target_link_libraries(xarf_shared ${MIMETIC_LIBRARIES})

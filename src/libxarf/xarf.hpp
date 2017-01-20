@@ -28,27 +28,24 @@
 #include <iostream>
 #include <string>
 
+#include <mimetic/message.h>
+#include <mimetic/mimetic.h>
 
-class XARF
+
+/** \brief X-ARF class namespace.
+ */
+namespace XARF {
+
+/** \brief Class representing the X-ARF report as mail.
+ *
+ * \details This class is a special mail type of mimetics MultipartMixed class.
+ *  MultipartMixed provides the basic structure of the mail, while this class
+ *  is responsible for the structure of the mail and its attachments.
+ */
+class XARF : mimetic::MultipartMixed
 {
-	public:
-		friend std::ostream& operator<< (std::ostream &out, const XARF &report);
-		//friend std::istream& operator>> (std::istream &in, XARF &report);
-
-		void set_from(const char *mail_address);
-		void set_from(std::string &mail_address);
-
-		void set_to(const char *mail_address);
-		void set_to(std::string &mail_address);
-
-		void set_message_body(const char *src);
-		void set_message_body(std::string &src);
-
-	private:
-		std::string mail_from;
-		std::string mail_to;
-		std::string mail_body;
 };
+}
 
 
 #endif

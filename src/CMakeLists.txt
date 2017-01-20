@@ -19,9 +19,5 @@
 #   2015-2017 Alexander Haase <ahaase@mksec.de>
 #
 
-
-#
-# recurse into subdirectories
-#
-add_subdirectory(genxarf)
+# Recurse into subdirectories.
 add_subdirectory(libxarf)
