@@ -11,11 +11,14 @@ matrix:
       sudo: required
       compiler: clang
 
-before_install:
-  - sudo add-apt-repository ppa:kalakris/cmake -y
-  - sudo apt-get update -qq
-  - sudo apt-get install cmake
-  - sudo apt-get install libmimetic-dev
+addons:
+  apt:
+    sources:
+      - kalakris-cmake
+    packages:
+      - cmake
+      - doxygen
+      - libmimetic-dev
 
 script:
   - mkdir build && cd build
