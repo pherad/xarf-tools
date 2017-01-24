@@ -24,7 +24,7 @@
 #define LIBXARF_MESSAGE_H
 
 
-#include <iostream>
+#include <cstdint>
 
 #include <mimetic/mimeentity.h>
 #include <xarf/dynamicEntity.hpp>
