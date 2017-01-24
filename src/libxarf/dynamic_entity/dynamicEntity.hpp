@@ -20,34 +20,30 @@
  *   2015-2017 Alexander Haase <ahaase@mksec.de>
  */
 
-#ifndef LIBXARF_MESSAGE_H
-#define LIBXARF_MESSAGE_H
+#ifndef LIBXARF_DYNAMIC_ENTITY_H
+#define LIBXARF_DYNAMIC_ENTITY_H
 
 
-#include <iostream>
-
-#include <mimetic/mimeentity.h>
-#include <xarf/dynamicEntity.hpp>
+#include <mimetic/message.h>
 
 
 namespace xarf {
 
-/** \brief Class for handling the X-ARF report as mail.
+/** \brief TextPlain class with auto-switch to Base64.
  *
- * \details This class is a special mimetic MimeEntity class to emit and parse
- *  X-ARF mails. MimeEntity provides the basic structure of the mail, while this
- *  class is responsible for the structure of the mail and its attachments.
- *
- * \note MultipartMixed can't be used due its incompatibility for parsing mails.
- *  It will generate new mails every time a constructor is called.
+ * \details RFC822 recommends a maximum length of 78 characters per line. But
+ *  Base64 needs more space to save the same data as plain text. This class
+ *  switches the encoding from plain to Base64 automatically, if at least one
+ *  line has more than 78 characters.
  */
-class message : public mimetic::MimeEntity
+class dynamicEntity : public mimetic::TextPlain
 {
 public:
-  message();
-  message(std::istream &);
+  dynamicEntity();
+  dynamicEntity(const std::string &text);
 
-  dynamicEntity *info();
+  void assign(const std::string &text);
+  const std::string fetch() const;
 };
 }
 

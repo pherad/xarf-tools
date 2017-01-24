@@ -20,36 +20,23 @@
  *   2015-2017 Alexander Haase <ahaase@mksec.de>
  */
 
-#ifndef LIBXARF_MESSAGE_H
-#define LIBXARF_MESSAGE_H
+#include <xarf/message.hpp>
 
 
-#include <iostream>
-
-#include <mimetic/mimeentity.h>
-#include <xarf/dynamicEntity.hpp>
+using xarf::message;
+using xarf::dynamicEntity;
 
 
-namespace xarf {
-
-/** \brief Class for handling the X-ARF report as mail.
+/** \brief Get the first MIME part.
  *
- * \details This class is a special mimetic MimeEntity class to emit and parse
- *  X-ARF mails. MimeEntity provides the basic structure of the mail, while this
- *  class is responsible for the structure of the mail and its attachments.
+ * \details The first MIME part is a human readable info message about what
+ *  happened.
  *
- * \note MultipartMixed can't be used due its incompatibility for parsing mails.
- *  It will generate new mails every time a constructor is called.
+ *
+ * \return Pointer to the first MIME part.
  */
-class message : public mimetic::MimeEntity
+dynamicEntity *
+message::info()
 {
-public:
-  message();
-  message(std::istream &);
-
-  dynamicEntity *info();
-};
+  return (dynamicEntity *)*(m_body.parts().begin());
 }
-
-
-#endif

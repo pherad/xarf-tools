@@ -37,6 +37,7 @@ include_directories(${MIMETIC_INCLUDE_DIRS}
 # available object libraries. Otherwise the compilation of libxarf will result
 # in errors, as easylib would select the static object library for the shared
 # X-ARF library.
+add_subdirectory(dynamic_entity)
 add_subdirectory(message)
 
 
@@ -45,6 +46,7 @@ add_subdirectory(message)
 #
 
 easy_add_library(xarf
-	$<TARGET_OBJECTS:xarf_message>)
+  $<TARGET_OBJECTS:xarf_dynamic_entity>
+  $<TARGET_OBJECTS:xarf_message>)
 
 target_link_libraries(xarf_shared ${MIMETIC_LIBRARIES})

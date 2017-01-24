@@ -27,10 +27,9 @@ include(xarf_headers)
 # getting conflicts about the used paths. Otherwise you'd have to take care
 # about file locations after installation, especially if you use the headers
 # over multiple directories.
-xarf_add_header(message.hpp)
+xarf_add_header(dynamicEntity.hpp)
 
 
-# Build libxarf message module.
-easy_add_library(xarf_message OBJECT
-  constructor.cpp
-  info.cpp)
+# Build libxarf dynamic entity module.
+easy_add_library(xarf_dynamic_entity OBJECT
+  dynamicEntity.cpp)

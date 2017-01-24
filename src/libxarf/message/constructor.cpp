@@ -22,12 +22,10 @@
 
 #include <xarf/message.hpp>
 
-#include <iostream>
-
 
 using xarf::message;
-using mimetic::Field;
 using mimetic::ContentType;
+using mimetic::Field;
 
 
 /** \brief Constructor.
@@ -39,7 +37,7 @@ message::message() : MimeEntity()
 {
   /* As MultipartMixed can't be used as base class, the headers for multipart
    * messages have to be setup here. */
-  ContentType ct("multipart", "unknown");
+  ContentType ct("multipart", "mixed");
   ct.paramList().push_back(
       ContentType::Param("boundary", ContentType::Boundary()));
   m_header.contentType(ct);
@@ -56,6 +54,18 @@ message::message() : MimeEntity()
    * signing or packing the reports should be done by other components and all
    * types encapsulate the PLAIN report. */
   m_header.push_back(Field("X-XARF: PLAIN"));
+
+
+  /* Add body parts for X-ARF message. A X-ARF message has (as described in
+   * X-ARF specification v0.2) the following parts:
+   *  1. Human readable text which contains at least basic information about the
+   *     reported incident. It may be accessed via the info method.
+   *  2. The actual report, a JSON formated key-value YAML formatted list named
+   *     "report.txt".
+   *  3. An optional evidence file, like a log file.
+   */
+  m_body.parts().clear();
+  m_body.parts().push_back(new dynamicEntity);
 }
 
 
